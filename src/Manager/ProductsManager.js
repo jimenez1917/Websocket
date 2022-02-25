@@ -1,12 +1,16 @@
 const fs = require('fs');
 const pathToProducts = __dirname+'/../files/products';
 
+const fetch = async()=>{
+    let data= await fs.promises.readFile(pathToProducts,'utf-8');
+    let products=JSON.parse(data);
+    return products;
+}
 class ProductsManager{
        add=async(product)=>{
            if(fs.existsSync(pathToProducts)){
                try{
-                   let data= await fs.promises.readFile(pathToProducts,'utf-8');
-                   let products=JSON.parse(data);
+                   let products= await fetch();
                    if(products.length===0){
                        product.id=1;
                        products.push(product);
@@ -34,8 +38,7 @@ class ProductsManager{
        get = async()=>{
            if(fs.existsSync(pathToProducts)){
                 try{
-                    let data= await fs.promises.readFile(pathToProducts,'utf-8');
-                    let products=JSON.parse(data);
+                    let products= await fetch();
                     return {status:"success", payload: products}
                }catch(error){
                    return {status:"error", error:'error'}
@@ -49,8 +52,7 @@ class ProductsManager{
         //    if(id) return {status: "error", error:id}
            if(fs.existsSync(pathToProducts)){
                try{
-                   let data = await fs.promises.readFile(pathToProducts,'utf-8')
-                   let products = JSON.parse(data);
+                   let products = await fetch();
                    let newproducts= products.filter(product => product.id!==parseInt(id))
                    await fs.promises.writeFile(pathToProducts,JSON.stringify(newproducts,null,2))
                    return {status:"success", payload:'Deleted Product'};
@@ -65,8 +67,7 @@ class ProductsManager{
            if(!id) return {status:"failes", message:"Needed an Id"}
            if(fs.existsSync(pathToProducts)){
                try{
-                   let data = await fs.promises.readFile(pathToProducts,'utf-8')
-                   let products = JSON.parse(data);
+                    let products = await fetch();
                    let product = products.filter(product =>product.id === parseInt(id))
                    return {status:'success', products:product}
                }catch(error) {
@@ -78,8 +79,7 @@ class ProductsManager{
            if(!id) return {status:'denied', message:'Needed an Id'}
            if(fs.existsSync(pathToProducts)){
                 try{
-                    let data = await fs.promises.readFile(pathToProducts,'utf-8')
-                    let products = JSON.parse(data);
+                    let products = await fetch();
                     let newproducts= products.map(product => {
                         if(product.id===parseInt(id)){
                             return body;

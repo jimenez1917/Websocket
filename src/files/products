@@ -1,26 +1,8 @@
 [
   {
-    "title": "",
-    "price": "",
-    "file": "",
+    "title": "Patri",
+    "price": "50",
+    "file": "Gato",
     "id": 1
-  },
-  {
-    "title": "",
-    "price": "",
-    "file": "",
-    "id": 2
-  },
-  {
-    "title": "asdasdasd",
-    "price": "asdasd",
-    "file": "Captura.PNG",
-    "id": 3
-  },
-  {
-    "title": "asdasdasd",
-    "price": "asdasd",
-    "file": "Captura.PNG",
-    "id": 4
   }
 ]
