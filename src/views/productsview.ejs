@@ -1,0 +1,19 @@
+<%- include('./partials/head') %> 
+<div class="container sm-6">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">URL</th>
+      </tr>
+</thead>
+<%- include('./partials/history',{products:result}) %> 
+</table>
+    <form action = "/" method = "get">
+        <button type="submit" class="btn btn-dark">Volver al Post</button>
+    <form>
+</div>
+</body>
+</html>
