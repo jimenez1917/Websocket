@@ -1,7 +1,23 @@
-{{#each products}}
-    <div>
-        <p>{{this.title}}</p>
-        <p>{{this.price}}</p>
-        <p>{{this.file}}</p>
-    </div>
-{{/each}}
+<div class="container sm-6">
+<table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Img</th>
+      </tr>
+</thead>
+      {{#each products as |products|}}
+        <tbody>
+            <tr>
+              <th scope="row">{{this.id}}</th>
+              <td>{{this.title}}</td>
+              <td>{{this.price}}</td>
+              <td>{{this.file}}</td>
+            </tr>
+        </tbody>
+       {{else}}
+        <p>No hay productos</p>
+      {{/each}}
+</table>

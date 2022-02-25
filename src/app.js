@@ -21,6 +21,10 @@ io.on('connection',async socket=>{
         let products = await ProductsService.get();
         io.emit('productlog',products);
     })
+    socket.on('message',data => {
+        console.log(data);
+    })
+    
 })
 
 
