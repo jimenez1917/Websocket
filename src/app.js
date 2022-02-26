@@ -10,19 +10,23 @@ const server = app.listen(PORT, ()=>console.log(`listening on ${PORT}`));
 const io=new Server(server);
 
 app.use(express.static(__dirname + '/public'))
-
+let log=[];
 io.on('connection',async socket=>{
     console.log('Conectado')
     let products = await ProductsService.get();
     io.emit('productlog',products);
+    io.emit('log',log);
 
     socket.on('sendProduct',async data=>{
         await ProductsService.add(data);
         let products = await ProductsService.get();
         io.emit('productlog',products);
     })
-    socket.on('message',data => {
+    socket.on('message',data=>{
         console.log(data);
+        log.push(data);
+        io.emit('log',log);
+        console.log(log);
     })
     
 })

@@ -30,12 +30,26 @@ function register(){
             if(user.value.trim().length>0 && mensaje.value.trim().length>0){
                 socket.emit('message',{
                 user:user.value,
+                date: new Date(),
                 message:mensaje.value
             })
+            }else{
+                alert('Usuario y mensaje obligatorio');
             }
-            user.value="";
-            mensaje.value="";
 }
+socket.on('log',(data)=>{
+    let chathistory = data;
+    let productTem = document.getElementById('chathistoryTem');
+    fetch('templates/chathistory.handlebars').then(response=>{
+        // let a=response.text();
+        // console.log(a);
+        return response.text();
+    }).then(template=>{
+        const processTem = Handlebars.compile(template);
+        const html = processTem({chathistory})
+        productTem.innerHTML=html;
+    })
+})
 // user.addEventListener('keyup',(evt)=>{
 //     if(evt.key==="Enter"){
 //         if(chatBox.value.trim().length>0){
